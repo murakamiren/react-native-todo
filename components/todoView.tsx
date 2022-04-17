@@ -29,16 +29,21 @@ const TodoView: VFC = () => {
 
 	const addTodo = () => {
 		console.log(text);
-		setTasks((preTodo) => [
-			...preTodo,
-			{
-				id: preTodo.slice(-1)[0].id + 1,
-				text: text,
-				isDone: false,
-				isDelete: false,
-			},
-		]);
-		setText(() => "");
+		if (text === "") {
+			// do nothing
+		} else {
+			setTasks((preTodo) => [
+				...preTodo,
+				{
+					id: preTodo.slice(-1)[0].id + 1,
+					text: text,
+					isDone: false,
+					isDelete: false,
+				},
+			]);
+			setText(() => "");
+		}
+		console.log(tasks);
 	};
 
 	return (
@@ -47,14 +52,14 @@ const TodoView: VFC = () => {
 				your tasks
 			</Text>
 			<VStack space={4}>
-				<ScrollView>
-					<VStack space={2}>
-						<AnimatePresence>
-							{tasks.map((task) => (
-								<TodoList key={task.id} text={task.text} />
+				<ScrollView maxH="96">
+					<AnimatePresence>
+						{tasks
+							.filter((d) => d.isDelete === false)
+							.map((task) => (
+								<TodoList key={task.id.toString()} id={task.id} text={task.text} tasks={tasks} setTasks={setTasks} />
 							))}
-						</AnimatePresence>
-					</VStack>
+					</AnimatePresence>
 				</ScrollView>
 				<Center>
 					<Input
@@ -65,6 +70,7 @@ const TodoView: VFC = () => {
 						value={text}
 						onChangeText={(e) => handleText(e)}
 						onEndEditing={addTodo}
+						isRequired={true}
 					/>
 				</Center>
 			</VStack>
