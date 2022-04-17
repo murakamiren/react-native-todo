@@ -1,14 +1,16 @@
-import { Box, Text } from "native-base";
+import { Box, Center, Text } from "native-base";
 import { VFC } from "react";
 import { SafeAreaView } from "react-native-safe-area-context";
+import AnimatedTest from "./animatedTest";
 
 const Index: VFC = () => {
 	return (
-		<Box>
-			<SafeAreaView>
-				<Text>hello world</Text>
-			</SafeAreaView>
-		</Box>
+		<SafeAreaView style={{ flex: 1 }}>
+			<Center mb={6}>
+				<Text fontSize="lg">react native todo</Text>
+			</Center>
+			<AnimatedTest />
+		</SafeAreaView>
 	);
 };
 
