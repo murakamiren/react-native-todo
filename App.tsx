@@ -1,10 +1,10 @@
-import { View } from "react-native";
+import { NativeBaseProvider } from "native-base";
 import Index from "./components";
 
 export default function App() {
 	return (
-		<View>
+		<NativeBaseProvider>
 			<Index />
-		</View>
+		</NativeBaseProvider>
 	);
 }
